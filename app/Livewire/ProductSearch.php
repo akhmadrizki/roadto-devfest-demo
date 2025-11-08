@@ -6,31 +6,32 @@ use Livewire\Component;
 
 class ProductSearch extends Component
 {
+    // Properti publik untuk menyimpan istilah pencarian
     public string $search = '';
-    public int $debounce = 300; // Debounce time in milliseconds
+    public int $debounce = 300;  // Waktu debounce dalam milidetik
 
     /**
-     * Mount the component - Lifecycle Hook
-     * Called when the component is first initialized
+     * Mount komponen - Lifecycle Hook
+     * Dipanggil ketika komponen pertama kali diinisialisasi
      */
     public function mount(): void
     {
-        // Initialize search term if needed
+        // Inisialisasi istilah pencarian jika diperlukan
         $this->search = '';
     }
 
     /**
-     * Updated lifecycle hook - called when a property is updated
-     * This demonstrates reactive property updates
+     * Updated lifecycle hook - dipanggil ketika properti diperbarui
+     * Ini menunjukkan pembaruan properti reaktif
      */
     public function updatedSearch(): void
     {
-        // Dispatch event to ProductList component when search changes
+        // Kirim event ke komponen ProductList ketika pencarian berubah
         $this->dispatch('search-updated', search: $this->search);
     }
 
     /**
-     * Clear search functionality
+     * Fungsi untuk membersihkan pencarian
      */
     public function clearSearch(): void
     {
@@ -39,7 +40,7 @@ class ProductSearch extends Component
     }
 
     /**
-     * Render the component
+     * Render komponen
      */
     public function render()
     {

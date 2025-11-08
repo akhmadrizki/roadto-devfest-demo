@@ -3,9 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Product;
-use Livewire\Component;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
+use Livewire\Component;
 use Livewire\WithPagination;
 
 class ProductList extends Component
@@ -15,8 +15,8 @@ class ProductList extends Component
     public string $search = '';
 
     /**
-     * Mount the component - Lifecycle Hook
-     * Best Practice: Initialize properties in mount() for better performance
+     * Mount komponen - Lifecycle Hook
+     * Best Practice: Inisialisasi properti di mount() untuk performa yang lebih baik
      */
     public function mount(): void
     {
@@ -24,23 +24,23 @@ class ProductList extends Component
     }
 
     /**
-     * Listen for search updates from ProductSearch component
+     * Dengarkan pembaruan pencarian dari komponen ProductSearch
      * Component Communication: Event Listener
      */
     #[On('search-updated')]
     public function updateSearch(string $search): void
     {
         $this->search = $search;
-        $this->resetPage(); // Reset pagination when search changes
+        $this->resetPage();  // Reset pagination ketika pencarian berubah
     }
 
     /**
-     * Computed property for products - Best Practice: Lazy Loading & Caching
-     * 
-     * Benefits:
-     * - Cached until dependencies ($search) change
-     * - Only executes when needed
-     * - Reduces unnecessary database queries
+     * Computed property untuk produk - Best Practice: Lazy Loading & Caching
+     *
+     * Manfaat:
+     * - Cached sampai dependensi ($search) berubah
+     * - Hanya dieksekusi ketika diperlukan
+     * - Mengurangi database queries yang tidak perlu
      */
     #[Computed(persist: false, seconds: 0)]
     public function products()
@@ -51,14 +51,14 @@ class ProductList extends Component
             $query->search($this->search);
         }
 
-        // Best Practice: Pagination reduces memory usage and improves performance
+        // Best Practice: Pagination mengurangi penggunaan memori dan meningkatkan performa
         return $query
             ->orderBy('name')
             ->paginate(12);
     }
 
     /**
-     * Render the component
+     * Render komponen
      */
     public function render()
     {
