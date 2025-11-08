@@ -10,6 +10,9 @@ Route::get('/', function () {
 
 Route::view('products', 'products')->name('products');
 
+// Volt Example: Product Statistics Component
+Route::view('products/stats', 'product-stats-page')->name('products.stats');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
